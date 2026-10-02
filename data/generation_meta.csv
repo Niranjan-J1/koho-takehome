@@ -1,0 +1,301 @@
+id,intended_category,messiness_tags,is_ambiguous
+t001,Transport,store_number,yes
+t002,Travel,location,no
+t003,Dining,truncated,yes
+t004,Transport,store_number,no
+t005,Groceries,case_drift;store_number,yes
+t006,Fees & Interest,clean,no
+t007,Health & Wellness,location,no
+t008,Shopping,clean,no
+t009,Groceries,asterisk;location,no
+t010,Travel,store_number,no
+t011,Groceries,location,no
+t012,Other,asterisk,no
+t013,Transport,store_number,yes
+t014,Entertainment,prefix_sq,no
+t015,Health & Wellness,store_number;location,no
+t016,Other,clean,yes
+t017,Other,clean,no
+t018,Dining,store_number,no
+t019,Subscriptions,asterisk,no
+t020,Bills & Utilities,clean,no
+t021,Fees & Interest,clean,no
+t022,Groceries,store_number;case_drift,no
+t023,Entertainment,clean,yes
+t024,Fees & Interest,truncated,no
+t025,Subscriptions,asterisk,no
+t026,Shopping,prefix_sq,no
+t027,Fees & Interest,clean,no
+t028,Health & Wellness,store_number,yes
+t029,Transport,store_number,no
+t030,Groceries,store_number;missing_space;location,no
+t031,Income & Transfers,clean,no
+t032,Shopping,case_drift,no
+t033,Health & Wellness,location,no
+t034,Dining,store_number,no
+t035,Travel,clean,no
+t036,Bills & Utilities,clean,no
+t037,Fees & Interest,clean,no
+t038,Shopping,store_number,no
+t039,Shopping,store_number,no
+t040,Dining,prefix_pos;store_number;location,no
+t041,Fees & Interest,clean,no
+t042,Fees & Interest,clean,no
+t043,Income & Transfers,store_number,no
+t044,Dining,prefix_tst;missing_space,no
+t045,Income & Transfers,clean,no
+t046,Transport,clean,yes
+t047,Income & Transfers,clean,no
+t048,Subscriptions,asterisk,no
+t049,Health & Wellness,truncated;store_number,yes
+t050,Dining,store_number,no
+t051,Groceries,store_number,no
+t052,Income & Transfers,clean,no
+t053,Groceries,location,no
+t054,Travel,store_number;location,no
+t055,Shopping,store_number,no
+t056,Shopping,clean,yes
+t057,Subscriptions,truncated;asterisk,no
+t058,Transport,asterisk,yes
+t059,Income & Transfers,clean,no
+t060,Health & Wellness,prefix_pos;store_number,no
+t061,Travel,clean,no
+t062,Fees & Interest,asterisk,no
+t063,Dining,location,no
+t064,Fees & Interest,truncated,no
+t065,Travel,store_number,no
+t066,Entertainment,clean,no
+t067,Travel,asterisk,no
+t068,Shopping,prefix_paypal,no
+t069,Dining,asterisk,no
+t070,Health & Wellness,truncated;store_number;location,yes
+t071,Dining,store_number,no
+t072,Shopping,store_number;location,no
+t073,Income & Transfers,case_drift,no
+t074,Income & Transfers,clean,no
+t075,Travel,clean,no
+t076,Groceries,store_number;location,no
+t077,Shopping,clean,yes
+t078,Transport,store_number,yes
+t079,Income & Transfers,truncated,no
+t080,Subscriptions,location,no
+t081,Income & Transfers,truncated,no
+t082,Subscriptions,clean,no
+t083,Subscriptions,clean,no
+t084,Entertainment,clean,yes
+t085,Subscriptions,location,no
+t086,Entertainment,clean,no
+t087,Groceries,truncated;store_number;location,yes
+t088,Other,missing_space,no
+t089,Other,truncated,yes
+t090,Dining,asterisk,no
+t091,Bills & Utilities,clean,no
+t092,Income & Transfers,clean,no
+t093,Entertainment,store_number,no
+t094,Transport,location,no
+t095,Dining,store_number,no
+t096,Shopping,store_number;location,yes
+t097,Transport,clean,no
+t098,Fees & Interest,clean,no
+t099,Transport,location,no
+t100,Subscriptions,asterisk,no
+t101,Transport,store_number;location,no
+t102,Entertainment,clean,no
+t103,Entertainment,clean,no
+t104,Health & Wellness,clean,no
+t105,Transport,asterisk,no
+t106,Subscriptions,clean,no
+t107,Groceries,truncated,yes
+t108,Groceries,store_number;location,no
+t109,Dining,prefix_sq;store_number,no
+t110,Dining,asterisk,no
+t111,Transport,store_number,no
+t112,Shopping,store_number,no
+t113,Travel,truncated;asterisk,no
+t114,Health & Wellness,store_number;location,no
+t115,Subscriptions,asterisk,no
+t116,Income & Transfers,clean,no
+t117,Health & Wellness,clean,no
+t118,Transport,clean,yes
+t119,Entertainment,asterisk,no
+t120,Income & Transfers,truncated,no
+t121,Shopping,prefix_pos;store_number;location,no
+t122,Groceries,prefix_pos;store_number,no
+t123,Shopping,store_number,no
+t124,Dining,prefix_tst,no
+t125,Income & Transfers,clean,no
+t126,Groceries,truncated,yes
+t127,Groceries,missing_space;location,no
+t128,Dining,truncated;asterisk,no
+t129,Transport,clean,no
+t130,Bills & Utilities,clean,no
+t131,Entertainment,clean,yes
+t132,Groceries,clean,no
+t133,Other,location,no
+t134,Transport,store_number,no
+t135,Fees & Interest,clean,no
+t136,Fees & Interest,truncated,no
+t137,Fees & Interest,clean,no
+t138,Transport,clean,no
+t139,Bills & Utilities,clean,no
+t140,Dining,missing_space,no
+t141,Fees & Interest,clean,no
+t142,Transport,location,no
+t143,Groceries,store_number;location,no
+t144,Shopping,store_number,no
+t145,Dining,store_number,no
+t146,Shopping,store_number,no
+t147,Fees & Interest,truncated,no
+t148,Groceries,store_number;location,no
+t149,Travel,location,no
+t150,Bills & Utilities,asterisk,no
+t151,Other,location,no
+t152,Transport,asterisk,no
+t153,Travel,asterisk,no
+t154,Transport,store_number;location,no
+t155,Health & Wellness,prefix_sq,no
+t156,Bills & Utilities,location,no
+t157,Groceries,store_number,yes
+t158,Groceries,prefix_pos;location,no
+t159,Shopping,clean,yes
+t160,Dining,asterisk,no
+t161,Income & Transfers,clean,no
+t162,Other,clean,no
+t163,Subscriptions,clean,yes
+t164,Income & Transfers,store_number,no
+t165,Transport,asterisk,yes
+t166,Health & Wellness,prefix_sq,no
+t167,Subscriptions,location,no
+t168,Shopping,truncated;store_number;location,no
+t169,Fees & Interest,clean,yes
+t170,Subscriptions,asterisk,no
+t171,Dining,location,no
+t172,Groceries,store_number;location,no
+t173,Other,asterisk,yes
+t174,Groceries,store_number,no
+t175,Shopping,store_number,no
+t176,Shopping,store_number,no
+t177,Bills & Utilities,truncated,no
+t178,Entertainment,location,no
+t179,Transport,missing_space,no
+t180,Health & Wellness,store_number,no
+t181,Bills & Utilities,clean,no
+t182,Shopping,case_drift;store_number,no
+t183,Subscriptions,clean,no
+t184,Bills & Utilities,clean,no
+t185,Shopping,truncated,yes
+t186,Subscriptions,clean,no
+t187,Income & Transfers,clean,no
+t188,Dining,store_number;location,no
+t189,Dining,prefix_sq,no
+t190,Dining,prefix_pos;truncated;store_number,no
+t191,Shopping,store_number,no
+t192,Subscriptions,clean,no
+t193,Income & Transfers,clean,no
+t194,Shopping,store_number;location,no
+t195,Bills & Utilities,clean,no
+t196,Health & Wellness,location,no
+t197,Health & Wellness,location,no
+t198,Income & Transfers,missing_space,no
+t199,Subscriptions,case_drift;location,no
+t200,Dining,store_number,no
+t201,Other,clean,no
+t202,Income & Transfers,clean,no
+t203,Transport,store_number,yes
+t204,Transport,store_number,no
+t205,Groceries,case_drift;store_number;location,no
+t206,Fees & Interest,clean,no
+t207,Groceries,case_drift,no
+t208,Health & Wellness,clean,no
+t209,Health & Wellness,asterisk,no
+t210,Transport,prefix_pos;store_number;location,no
+t211,Bills & Utilities,location,no
+t212,Dining,location,no
+t213,Income & Transfers,truncated;store_number;location,no
+t214,Income & Transfers,clean,no
+t215,Subscriptions,asterisk,no
+t216,Dining,prefix_sq,no
+t217,Travel,clean,no
+t218,Shopping,location,no
+t219,Travel,clean,no
+t220,Dining,clean,no
+t221,Bills & Utilities,clean,no
+t222,Shopping,asterisk,yes
+t223,Dining,store_number;location,no
+t224,Travel,asterisk;missing_space,no
+t225,Subscriptions,missing_space;asterisk,no
+t226,Groceries,store_number,no
+t227,Subscriptions,asterisk,yes
+t228,Income & Transfers,clean,no
+t229,Bills & Utilities,clean,no
+t230,Dining,prefix_sq;location,no
+t231,Bills & Utilities,clean,no
+t232,Dining,location,no
+t233,Transport,store_number,no
+t234,Transport,location,no
+t235,Dining,truncated;store_number,no
+t236,Transport,location,no
+t237,Entertainment,truncated;asterisk,no
+t238,Subscriptions,asterisk,no
+t239,Shopping,location,no
+t240,Other,clean,no
+t241,Transport,clean,yes
+t242,Groceries,store_number,no
+t243,Entertainment,store_number,yes
+t244,Dining,asterisk,no
+t245,Entertainment,prefix_sq,no
+t246,Groceries,location,no
+t247,Transport,asterisk,no
+t248,Health & Wellness,location,no
+t249,Dining,store_number,no
+t250,Bills & Utilities,clean,no
+t251,Groceries,location,no
+t252,Groceries,missing_space;asterisk,no
+t253,Bills & Utilities,clean,no
+t254,Income & Transfers,clean,no
+t255,Subscriptions,asterisk,no
+t256,Bills & Utilities,location,no
+t257,Subscriptions,missing_space,no
+t258,Dining,case_drift;store_number,no
+t259,Health & Wellness,store_number,no
+t260,Dining,location,no
+t261,Travel,clean,no
+t262,Groceries,missing_space,no
+t263,Shopping,truncated;asterisk;case_drift,yes
+t264,Bills & Utilities,clean,no
+t265,Bills & Utilities,clean,no
+t266,Dining,store_number,no
+t267,Health & Wellness,store_number,no
+t268,Other,clean,no
+t269,Other,store_number,no
+t270,Bills & Utilities,location,no
+t271,Shopping,store_number,no
+t272,Transport,location,no
+t273,Income & Transfers,clean,no
+t274,Bills & Utilities,asterisk,no
+t275,Other,truncated,no
+t276,Transport,store_number;location,no
+t277,Groceries,store_number;truncated,no
+t278,Shopping,truncated,yes
+t279,Travel,location,no
+t280,Shopping,location,no
+t281,Entertainment,store_number,no
+t282,Other,prefix_sq,no
+t283,Transport,truncated,yes
+t284,Groceries,location,no
+t285,Fees & Interest,truncated,yes
+t286,Shopping,store_number,no
+t287,Shopping,missing_space,no
+t288,Dining,store_number,no
+t289,Groceries,store_number;location,no
+t290,Groceries,store_number,no
+t291,Entertainment,location,no
+t292,Dining,clean,no
+t293,Income & Transfers,clean,no
+t294,Dining,store_number,no
+t295,Dining,prefix_tst,no
+t296,Shopping,store_number,no
+t297,Shopping,store_number;location,no
+t298,Shopping,truncated;store_number,yes
+t299,Groceries,store_number,no
+t300,Dining,store_number,no

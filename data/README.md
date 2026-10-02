@@ -2,7 +2,8 @@
 
 | File | Origin | Columns |
 |------|--------|---------|
-| `transactions.csv` | Generated, no labels | `id`, `description` |
+| `transactions.csv` | Authored directly by Claude Code (no LLM call), no labels. Rows shuffled with seed 42 before ids `t001`..`t300` were assigned | `id`, `description` |
+| `generation_meta.csv` | Sealed. Generator intent for coverage checks and later analysis. Never ground truth. Do not open while labelling | `id`, `intended_category`, `messiness_tags`, `is_ambiguous` |
 | `dev_transactions.csv` | Seeded split script output, unlabelled | `id`, `description` |
 | `test_transactions.csv` | Seeded split script output, unlabelled | `id`, `description` |
 | `dev_labels.csv` | Hand-written by the author | `id`, `category` |
