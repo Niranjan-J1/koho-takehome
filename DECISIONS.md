@@ -63,5 +63,20 @@
 - The refund rule depends on the string saying refund, reversal or return. Other refunds will be categorised by merchant.
 - Hybrid gas and convenience chains rely on the string making the fuel identity recognisable.
 
+## 2026-10-02: Classifier model, gemini-3.8-flash
+**Decision:** The classifier model is `gemini-3.8-flash`, chosen from the models my key can access (listed via `src/list_models.py`, 61 models returned).
+**Reasoning:**
+- It is a current non-preview Flash model.
+- Flash balances capability with free-tier access.
+- Pro left the free tier in April 2026.
+- The explicit string is pinned rather than a `-latest` alias, because aliases can change which model they point to and would break reproducibility and the A vs B comparison.
+
+## 2026-10-02: Same model for Approach A and Approach B
+**Decision:** The same model is used for both Approach A and Approach B.
+**Reasoning:** The only variable between them is the prompt detail level.
+
+## 2026-10-02: Known limitation, optimistic accuracy
+**Limitation:** I am using the newest, strongest free Flash model on synthetic data. This likely makes the task easier than real traffic, so reported accuracy will be optimistic.
+
 ## AI mistakes caught
 - 2026-10-02: AI-drafted tie-breaks depended on information not present in a single transaction string.
