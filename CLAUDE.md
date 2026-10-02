@@ -26,7 +26,7 @@ The evaluation is more important than the classifier. Time limit: 4 hours.
 
 ## Conventions
 - Python. Taxonomy lives in taxonomy.yaml; prompts are built from it.
-- Evaluation runs with one command: python src/eval.py --approach <name>
+- Evaluation runs with one command: python src/eval.py --approach  <name>
 - Cache LLM responses; temperature 0.
 - Run tests with: pytest
 
