@@ -1,8 +1,52 @@
 # Category taxonomy. Prompts are built from this file.
 # Approach A uses only `name`. Approach B also uses `definition` and `tie_break`.
-#
-# categories:
-#   - name: <category name>
-#     definition: <what belongs in this category>
-#     tie_break: <optional rule for when it overlaps with another category>
-categories: []
+# Every tie_break must be decidable from a single description string (see DECISIONS.md).
+# Frozen before the first model run. Later changes must be logged in DECISIONS.md.
+categories:
+  - name: "Groceries"
+    definition: "Supermarkets and bulk food retailers."
+    tie_break: "Convenience-store chains are Shopping, not Groceries."
+
+  - name: "Dining"
+    definition: "Restaurants, cafes, bars, fast food, and food-delivery apps."
+    tie_break: "Food-delivery apps are Dining, not Groceries."
+
+  - name: "Transport"
+    definition: "Transit, rideshare, taxis, parking, tolls, and fuel."
+    tie_break: "Gas-station and fuel-brand merchants are Transport, even if they also run convenience stores. Airlines are Travel, not Transport."
+
+  - name: "Shopping"
+    definition: "Retail stores and online marketplaces: clothing, electronics, home goods, and convenience-store chains."
+    tie_break: "Pharmacy chains are Health & Wellness, not Shopping."
+
+  - name: "Subscriptions"
+    definition: "Streaming, music, software, and cloud service merchants."
+    tie_break: "Streaming services are Subscriptions, not Entertainment."
+
+  - name: "Bills & Utilities"
+    definition: "Phone, internet, electricity, natural gas, water, and insurance providers."
+    tie_break: "Only natural gas utility providers belong here. Gas-station merchants and any bare \"gas\" at a fuel merchant are Transport."
+
+  - name: "Health & Wellness"
+    definition: "Pharmacy chains, dental and medical providers, gyms, and fitness."
+    tie_break: "Pharmacy chains go here regardless of what was bought."
+
+  - name: "Entertainment"
+    definition: "Cinemas, concerts, events, and games."
+    tie_break: "Video game stores and publishers are Entertainment. A description naming a game subscription service is Subscriptions. Streaming services are Subscriptions, not Entertainment."
+
+  - name: "Travel"
+    definition: "Airlines, hotels, vacation rentals, and travel agencies."
+
+  - name: "Fees & Interest"
+    definition: "Bank fees, NSF fees, foreign exchange fees, and interest charges."
+    tie_break: "Use only when the description itself names a fee or interest charge."
+
+  # Known limitation: rent usually arrives as an e-transfer and lands here.
+  - name: "Income & Transfers"
+    definition: "Non-merchant money movement: payroll, e-transfers, deposits, refunds, and cash withdrawals."
+    tie_break: "Use for a refund only when the description says refund, reversal, or return."
+
+  - name: "Other"
+    definition: "Does not clearly fit any category above."
+    tie_break: "Last resort. Use only if no other definition or tie-break applies."
