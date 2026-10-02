@@ -51,5 +51,17 @@
 **Decision:** A single `taxonomy.yaml` feeds both approaches. The prompt builder has a detail setting: `names` (Approach A) or `full` (Approach B, which adds definitions and tie-breaks). Everything else in the prompt is identical.
 **Reasoning:** A is a strict subset of B, so the label set is the same.
 
+## 2026-10-02: Taxonomy weak spots fixed and YAML validated
+**Decision:** Before any model run, I fixed three weak spots in `taxonomy.yaml` by reasoning, not from dev errors:
+- Transport: gas-station and fuel-brand merchants are Transport, even if they also run convenience stores.
+- Bills & Utilities: only natural gas utility providers belong here. Gas-station merchants and any bare "gas" at a fuel merchant are Transport.
+- Entertainment: video game stores and publishers are Entertainment. A description naming a game subscription service is Subscriptions.
+
+**Validation:** Parsed with PyYAML. 12 unique categories, each with `name` and `definition`, only the keys `name`, `definition` and `tie_break`, and Other is last.
+
+**Known limitations:**
+- The refund rule depends on the string saying refund, reversal or return. Other refunds will be categorised by merchant.
+- Hybrid gas and convenience chains rely on the string making the fuel identity recognisable.
+
 ## AI mistakes caught
 - 2026-10-02: AI-drafted tie-breaks depended on information not present in a single transaction string.
