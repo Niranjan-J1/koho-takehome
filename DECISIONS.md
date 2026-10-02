@@ -25,5 +25,31 @@
 **Decision:** Every LLM response is cached on disk in `cache/` (git-ignored), with temperature 0.
 **Reasoning:** The free-tier quota is limited, and caching makes reruns free and reproducible.
 
+## 2026-10-02: Taxonomy provenance
+**Decision:** The first taxonomy draft was written by Claude Code. I reviewed it, then got a second opinion from a separate Claude chat session, which found the problems listed in the entries below. I made the revision decisions.
+**Note:** The first draft existed only in chat and was never committed, so git history starts at the revised version.
+
+## 2026-10-02: Principle, tie-breaks must be decidable from the description string
+**Decision:** Every tie-break must be decidable from a single transaction description string.
+**Reasoning:** A rule that depends on information the string cannot contain (whether a payment recurs, what was bought) cannot be applied by the model or by me when labelling, so it adds noise instead of signal.
+
+## 2026-10-02: Taxonomy revisions
+**Decision:**
+- Subscriptions: defined by merchant type (streaming, music, software, cloud services), not by recurrence.
+- Health & Wellness: pharmacy chains go here regardless of what was bought.
+- Groceries: ruled by chain type. Supermarkets and bulk food retailers stay; convenience-store chains go to Shopping.
+- Bills & Utilities: says "natural gas" so it cannot be confused with fuel. "Rent" is removed.
+- Income & Transfers: deliberately kept as "non-merchant money movement". Cash withdrawals are added, since ATM cash is common on a prepaid card.
+- New category Entertainment (cinemas, concerts, events, games), making 12 categories. Streaming stays in Subscriptions.
+
+**Known limitation:** Rent usually arrives as an e-transfer, so it will land in Income & Transfers.
+
+## 2026-10-02: B's definitions and tie-breaks are frozen before the first model run
+**Decision:** B's definitions and tie-breaks are frozen before the first model run. They must come from reasoning about the categories, not from errors seen on dev. Any later change must be logged with its reason, and I will weigh both approaches equally when tuning.
+
+## 2026-10-02: One taxonomy file, two prompt detail levels
+**Decision:** A single `taxonomy.yaml` feeds both approaches. The prompt builder has a detail setting: `names` (Approach A) or `full` (Approach B, which adds definitions and tie-breaks). Everything else in the prompt is identical.
+**Reasoning:** A is a strict subset of B, so the label set is the same.
+
 ## AI mistakes caught
-_None logged yet. Entries are added when the author asks._
+- 2026-10-02: AI-drafted tie-breaks depended on information not present in a single transaction string.
