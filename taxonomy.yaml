@@ -1,0 +1,8 @@
+# Category taxonomy. Prompts are built from this file.
+# Approach A uses only `name`. Approach B also uses `definition` and `tie_break`.
+#
+# categories:
+#   - name: <category name>
+#     definition: <what belongs in this category>
+#     tie_break: <optional rule for when it overlaps with another category>
+categories: []
