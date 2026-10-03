@@ -1,0 +1,51 @@
+id,description,label,prediction,valid,normalised,confidence,correct
+t012,CANADA POST*PO BOX,Other,Other,True,False,90.0,True
+t014,SQ *STRIKE BOWLING LANES,Entertainment,Entertainment,True,False,95.0,True
+t023,EPIC GAMES STORE,Entertainment,Entertainment,True,False,100.0,True
+t030,RCSS#1553 EDMONTON AB,Groceries,Groceries,True,False,100.0,True
+t032,dollarama,Shopping,Shopping,True,False,100.0,True
+t034,TIM HORTONS #1234,Dining,Dining,True,False,100.0,True
+t035,PORTER AIRLINES,Travel,Travel,True,False,100.0,True
+t036,FIDO MOBILE,Bills & Utilities,Bills & Utilities,True,False,100.0,True
+t041,E-TRANSFER FEE,Fees & Interest,Fees & Interest,True,False,100.0,True
+t044,TST*PHO HOA ESCOFFIER,Dining,Dining,True,False,100.0,True
+t046,PETRO-CANADA NEIGHBOURS STORE,Transport,Transport,True,False,100.0,True
+t048,ADOBE *CREATIVE CLOUD,Subscriptions,Subscriptions,True,False,100.0,True
+t053,FOOD BASICS WINDSOR ON,Groceries,Groceries,True,False,100.0,True
+t059,TRANSFER FROM SAVINGS,Income & Transfers,Income & Transfers,True,False,100.0,True
+t066,TIFF BELL LIGHTBOX,Entertainment,Entertainment,True,False,95.0,True
+t069,UBER *EATS,Dining,Dining,True,False,100.0,True
+t071,MCDONALD'S #4821,Dining,Dining,True,False,100.0,True
+t072,7-ELEVEN 31245 TORONTO,Shopping,Shopping,True,False,100.0,True
+t074,ATM WITHDRAWAL,Income & Transfers,Income & Transfers,True,False,100.0,True
+t090,UBER *EATS HELP.UBER.COM,Dining,Dining,True,False,100.0,True
+t091,HYDRO ONE PRE-AUTH,Bills & Utilities,Bills & Utilities,True,False,100.0,True
+t097,407 ETR,Transport,Transport,True,False,100.0,True
+t111,SHELL #55821,Transport,Transport,True,False,100.0,True
+t115,GOOGLE *YOUTUBE PREMIUM,Subscriptions,Subscriptions,True,False,100.0,True
+t132,REAL CANADIAN SUPERSTORE,Groceries,Groceries,True,False,100.0,True
+t141,ATM FEE,Fees & Interest,Fees & Interest,True,False,100.0,True
+t149,HILTON TORONTO,Travel,Travel,True,False,100.0,True
+t150,ROGERS ***6512,Bills & Utilities,Bills & Utilities,True,False,100.0,True
+t151,UNITED WAY GREATER TORONTO,Other,Other,True,False,90.0,True
+t158,POS LOBLAWS MISSISSAUGA,Groceries,Groceries,True,False,100.0,True
+t163,XBOX GAME PASS,Subscriptions,Subscriptions,True,False,100.0,True
+t191,INDIGO BOOKS #1021,Shopping,Shopping,True,False,95.0,True
+t194,APPLE STORE R121 TORONTO,Shopping,Shopping,True,False,95.0,True
+t199,Netflix.com Los Gatos CA,Subscriptions,Subscriptions,True,False,100.0,True
+t200,POPEYES #8450,Dining,Dining,True,False,100.0,True
+t206,OVERDRAFT FEE,Fees & Interest,Fees & Interest,True,False,100.0,True
+t208,LIFELABS ONTARIO,Health & Wellness,Health & Wellness,True,False,100.0,True
+t209,GOODLIFE FITNESS* MEMBERSHIP,Health & Wellness,Health & Wellness,True,False,100.0,True
+t210,POS ESSO 4410 MARKHAM ON,Transport,Transport,True,False,100.0,True
+t214,E-TRANSFER SENT,Income & Transfers,Income & Transfers,True,False,100.0,True
+t231,BELL CANADA PRE-AUTH PYMT,Bills & Utilities,Bills & Utilities,True,False,100.0,True
+t236,STM OPUS RECHARGE MONTREAL QC,Transport,Transport,True,False,100.0,True
+t239,SIMONS QUEBEC QC,Shopping,Shopping,True,False,100.0,True
+t262,FARMBOY,Groceries,Groceries,True,False,95.0,True
+t267,GOODLIFE FITNESS #0231,Health & Wellness,Health & Wellness,True,False,100.0,True
+t273,REVERSAL TIM HORTONS,Income & Transfers,Income & Transfers,True,False,100.0,True
+t279,WESTJET AIRLINES CALGARY AB,Travel,Travel,True,False,100.0,True
+t280,IKEA NORTH YORK ON,Shopping,Shopping,True,False,100.0,True
+t282,SQ *ROYAL DRY CLEANERS,Other,Other,True,False,90.0,True
+t288,SUBWAY #28811,Dining,Dining,True,False,100.0,True
