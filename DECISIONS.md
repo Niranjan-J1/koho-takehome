@@ -130,6 +130,16 @@
 **Caveat:** This change was made during test labelling, prompted by a test string, before any model run. No model output was involved. Only these two test rows are affected; dev has no PayPal rows.
 **AI edit to label files, at my request:** Claude Code removed the empty `note` column from both files. It checked that every id, description and label is identical before and after, and that every label is one of the 12 taxonomy names. No label was read out or changed.
 
+## 2026-10-03: Harness choices
+**Decision:**
+- Output is JSON mode with no enum constraint on the category. Any category that is not one of the 12 names, any malformed JSON and any missing field is invalid and scored as an error.
+- `thinking_config` is left at the model default for both approaches. Tuning it would add a second variable next to the prompt detail level.
+- The better approach for the confidence analysis is picked on dev and frozen here before the test run.
+- `results/*.csv` are committed so every prediction can be audited.
+
+**Reasoning:** An enum constraint would push invalid outputs to near zero and hide that failure mode. Picking the better approach on test would be selection on test.
+**Reproducibility:** Reruns are reproducible because every response is cached on disk, not because of temperature 0 or a seed. Temperature 0 and a seed reduce variation between fresh calls but do not guarantee identical outputs, so a cleared cache can give different results.
+
 ## AI mistakes caught
 - 2026-10-02: AI-drafted tie-breaks depended on information not present in a single transaction string.
 - 2026-10-02: When showing a commit diff, Claude Code printed the first rows of the sealed `generation_meta.csv`, exposing intended categories for `t001` to `t003`. Fixed by forcing them into reserve.
