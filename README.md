@@ -24,17 +24,17 @@ GEMINI_MODEL=gemini-3.5-flash-lite
 ## Run it
 Dev set (for iterating; safe to run freely)
 
-python src/eval.py --approach A
+python src/eval.py --approach A :  
 python src/eval.py --approach B
 
 Test set (run once; guarded against accidents)
 
-python src/eval.py --approach A --split test --confirm-test
+python src/eval.py --approach A --split test --confirm-test :  
 python src/eval.py --approach B --split test --confirm-test
 
 Compare the two approaches and analyse confidence
 
-python src/compare.py --split test
+python src/compare.py --split test :  
 python src/confidence.py --approach B --split test
 
 Run the test suite (no API calls)
