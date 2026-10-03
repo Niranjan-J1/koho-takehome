@@ -6,6 +6,7 @@
 | `generation_meta.csv` | Sealed. Generator intent for coverage checks and later analysis. Never ground truth. Do not open while labelling | `id`, `intended_category`, `messiness_tags`, `is_ambiguous` |
 | `dev_transactions.csv` | Seeded split script output, unlabelled | `id`, `description` |
 | `test_transactions.csv` | Seeded split script output, unlabelled | `id`, `description` |
+| `reserve_transactions.csv` | Seeded split script output, unlabelled. Not labelled or evaluated. Includes 11 forced ids whose intended category was exposed | `id`, `description` |
 | `dev_labels.csv` | Hand-written by the author | `id`, `category` |
 | `test_labels.csv` | Hand-written by the author | `id`, `category` |
 

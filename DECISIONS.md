@@ -94,5 +94,22 @@
 - **Intended categories are guesses.** For ambiguous rows, `intended_category` is the generator's most likely guess. My labels are the ground truth and may legitimately differ.
 - **Small dev classes.** With about 50 dev rows over 12 classes, rare classes get only a few dev rows each, so per-class accuracy will be noisy.
 
+## 2026-10-02: Seeded stratified split
+**Decision:** `src/split.py` splits the 300 rows into dev 50, test 100 and reserve 150, stratified by `intended_category` from the sealed file, with seed 2026. The seed was chosen before seeing any split and will not be re-rolled. The script refuses to overwrite existing split files without `--force`.
+**Reasoning:** With 12 classes and 50 dev rows, a plain random split could leave a rare class with no dev rows. Stratifying uses the sealed file only to decide membership, before any labelling, and never as a label.
+**Assumption:** Intended categories are guesses for ambiguous rows, so per-class counts in my labels may drift slightly from the allocation.
+**Result:** Dev gets 3 to 7 rows per class and test gets 5 to 14. Ambiguous rows: dev 3, test 12, reserve 24.
+**Caveats:**
+- Per-class accuracy on about 5 test rows moves in 20-point steps, so per-class numbers are descriptive only. Overall accuracy and the paired A vs B comparison on the 100 test rows are the headline results.
+- Dev has only 3 ambiguous rows, so iterating on dev gives little signal on hard cases. I accept this rather than re-rolling the seed.
+
+## 2026-10-02: 11 ids forced into reserve after exposure
+**Decision:** Eleven ids are forced into reserve so that no dev or test row has an intended category I saw before labelling: `t001`, `t002`, `t003` (sealed-file rows printed in chat), Costco `t005`, `t087`, `t126`, `t157`, and Walmart `t056`, `t096`, `t159`, `t298` (intended category stated in chat). They are excluded before stratifying. If the reserve is ever used, these stay excluded.
+**Cost:** 10 of the 11 are ambiguous, so dev and test lose some of their most instructive rows.
+
 ## AI mistakes caught
 - 2026-10-02: AI-drafted tie-breaks depended on information not present in a single transaction string.
+- 2026-10-02: When showing a commit diff, Claude Code printed the first rows of the sealed `generation_meta.csv`, exposing intended categories for `t001` to `t003`. Fixed by forcing them into reserve.
+- 2026-10-02: In a progress report, Claude Code stated its intended category for Costco (Groceries) and Walmart (Shopping), exposing 8 rows. Fixed by forcing them into reserve.
+- 2026-10-02: Per-category ambiguous counts in a progress report could be matched against the ambiguous merchant list to infer intended categories (for example, 3 ambiguous Health & Wellness rows and 3 Shoppers rows). This is an inferential exposure only. The taxonomy's pharmacy rule already settles Shoppers, so no rows were reserved for it.
+- 2026-10-02: Claude Code authored every intended category, so it must not suggest labels for dev or test rows.
