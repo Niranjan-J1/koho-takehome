@@ -107,6 +107,21 @@
 **Decision:** Eleven ids are forced into reserve so that no dev or test row has an intended category I saw before labelling: `t001`, `t002`, `t003` (sealed-file rows printed in chat), Costco `t005`, `t087`, `t126`, `t157`, and Walmart `t056`, `t096`, `t159`, `t298` (intended category stated in chat). They are excluded before stratifying. If the reserve is ever used, these stay excluded.
 **Cost:** 10 of the 11 are ambiguous, so dev and test lose some of their most instructive rows.
 
+## 2026-10-02: Labelling convention, frozen before any model run
+**Decision:** I label with this convention, frozen now, before any model run:
+- Unrecognizable/truncated strings (e.g. PETRO-): label Other.
+- Bare ambiguous merchants, default rules: AMAZON → Shopping; bare PAYPAL → Income & Transfers; bare GAS → Transport.
+- Hybrid gas/convenience: fuel-first stations → Transport; convenience chains → Shopping unless the string says fuel.
+- Pharmacy chains → Health & Wellness regardless.
+- When genuinely torn, pick the best fit and write why in the note.
+
+**Order:** Dev is labelled before test, and test is labelled before any dev model run, so model errors seen on dev cannot shift how I label test.
+**Format:** `dev_labels.csv` and `test_labels.csv` have the columns `id`, `description`, `label`, `note`, pre-filled with ids and descriptions from the split and with empty labels. The category list and this convention live in `data/LABELLING.md`, not in a `#` header, because Python's `csv` module has no comment support and pandas' `comment="#"` would truncate descriptions at store numbers such as `#1042`.
+
+**Measured effects (recorded, not fixed):**
+- Approach B's prompt does not contain this convention. Rows where the convention decides the label (bare PayPal, truncated strings, convenience chains vs fuel) may be systematically wrong for both approaches. That error is part of what is measured.
+- The frozen taxonomy's Transport tie-break says fuel brands are Transport even if they also run convenience stores, while this convention sends convenience chains to Shopping unless the string says fuel. A chain that is both can land differently under each. My label decides, with the reason in the note.
+
 ## AI mistakes caught
 - 2026-10-02: AI-drafted tie-breaks depended on information not present in a single transaction string.
 - 2026-10-02: When showing a commit diff, Claude Code printed the first rows of the sealed `generation_meta.csv`, exposing intended categories for `t001` to `t003`. Fixed by forcing them into reserve.
