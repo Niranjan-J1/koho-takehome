@@ -162,9 +162,39 @@ what I'm measuring, because both approaches use the same model. If I regain
 Flash quota, a Flash-vs-Flash-Lite comparison would be a useful add-on and is
 noted as possible future work.
 
+## 2026-10-03: Dev results and findings (exploratory)
+**Model:** gemini-3.5-flash-lite. n=50 dev rows. Dev results are exploratory; the headline is the test run.
+
+**As first scored (before the t262 label correction):**
+- Approach A (names only): 90.0% (45/50), 95% Wilson CI 78.6–95.7%.
+- Approach B (full definitions + tie-breaks): 98.0% (49/50), CI 89.5–99.6%.
+- Paired: both right 45, only A 0, only B 4, both wrong 1.
+- B - A = +8.0%, 95% paired bootstrap CI +2.0% to +16.0%.
+- Exact McNemar two-sided p = 0.125 on 4 discordant rows.
+
+**After correcting t262 (rescored from cache, 0 new API calls):**
+- A: 92.0% (46/50), 95% Wilson CI 81.2–96.8%.
+- B: 100.0% (50/50), CI 92.9–100.0%.
+- Paired: both right 46, only A 0, only B 4, both wrong 0.
+- B - A = +8.0%, 95% paired bootstrap CI +2.0% to +16.0%. Exact McNemar two-sided p = 0.125.
+- The correction moved both approaches up by one row and did not change the discordant pairs.
+
+**Interpretation:**
+- The bootstrap CI excludes zero but exact McNemar is non-significant. With only 4 discordant rows this is expected: 4-0 gives p=0.125 at best, so the data is too thin to confirm the gap. Headline claim follows the more conservative test: B directionally better on dev, NOT statistically confirmed.
+- The bootstrap lower bound above zero is not independent evidence. All 4 discordant rows favour B, so no resample can produce a negative difference; the lower bound sits above zero only because a resample with no discordant rows is rare. With this few discordant rows the percentile bootstrap is unreliable, which is another reason to follow McNemar.
+- B's advantage came entirely from tie-breaks/definitions resolving ambiguous or convention-dependent cases, not from better handling of obvious merchants. Specifics:
+  - t072 7-ELEVEN: A->Groceries, B->Shopping (convenience-chain tie-break).
+  - t074 ATM WITHDRAWAL: A->Other, B->Income & Transfers (definition names cash withdrawals).
+  - t273 REVERSAL TIM HORTONS: A->Dining, B->Income & Transfers (refund/reversal tie-break).
+  - t012 CANADA POST: A->Bills & Utilities, B->Other (B avoided forcing a wrong fit).
+- t262 FARMBOY: both approaches predicted Groceries (confidence 100 for A, 95 for B) against my Dining label; this exposed a labelling error in my own ground truth, now corrected. Farm Boy is a Canadian grocery chain, so Dining was wrong against my taxonomy's Groceries definition. Lesson recorded: when both approaches confidently disagree with a label in the same way, the label itself is worth re-checking.
+
+**Label audit and its bias:** To avoid fixing only model-favourable rows, the other four dev errors (t012, t072, t074, t273) were re-checked. Claude Code re-checked the other four labels against the taxonomy and reported all four consistent; I reviewed its reasoning and agree. None changed; these are genuine model errors, not label errors. This audit only looked at rows where a model disagreed with me. Rows where a model agreed with a wrong label were not re-checked, so correcting disagreements can only raise measured accuracy. I checked test for any Farm Boy row before the test run: there is none.
+
 ## AI mistakes caught
 - 2026-10-02: AI-drafted tie-breaks depended on information not present in a single transaction string.
 - 2026-10-02: When showing a commit diff, Claude Code printed the first rows of the sealed `generation_meta.csv`, exposing intended categories for `t001` to `t003`. Fixed by forcing them into reserve.
 - 2026-10-02: In a progress report, Claude Code stated its intended category for Costco (Groceries) and Walmart (Shopping), exposing 8 rows. Fixed by forcing them into reserve.
 - 2026-10-02: Per-category ambiguous counts in a progress report could be matched against the ambiguous merchant list to infer intended categories (for example, 3 ambiguous Health & Wellness rows and 3 Shoppers rows). This is an inferential exposure only. The taxonomy's pharmacy rule already settles Shoppers, so no rows were reserved for it.
 - 2026-10-02: Claude Code authored every intended category, so it must not suggest labels for dev or test rows.
+- 2026-10-03: My own holdout contained a labelling error (t262 FARMBOY labelled Dining, should be Groceries), surfaced by model/label disagreement rather than by me.
