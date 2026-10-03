@@ -140,6 +140,28 @@
 **Reasoning:** An enum constraint would push invalid outputs to near zero and hide that failure mode. Picking the better approach on test would be selection on test.
 **Reproducibility:** Reruns are reproducible because every response is cached on disk, not because of temperature 0 or a seed. Temperature 0 and a seed reduce variation between fresh calls but do not guarantee identical outputs, so a cleared cache can give different results.
 
+## 2026-10-03: Switched classifier model to gemini-3.5-flash-lite
+
+Decision: Changed GEMINI_MODEL from gemini-3.8-flash to gemini-3.5-flash-lite
+for all classification runs.
+
+Reason: Repeated 429 rate-limit errors on gemini-3.8-flash exhausted the free-
+tier quota before I could complete the dev runs. Flash-Lite has higher free-
+tier limits, which lets me finish the A/B comparison in one session.
+
+Integrity: No completed result set existed when I switched — the dev run
+aborted on the 429 before eval.py wrote any results file, so no results mix
+two models. All reported results (dev and test, A and B) use flash-lite
+consistently. One approach, one model, all rows. The cache key includes the
+model name, so the handful of orphaned flash calls from the aborted run stay
+separate and are not used in any result.
+
+Trade-off: Flash-Lite is a smaller model, so absolute accuracy may be lower
+than Flash would give. That doesn't affect the A-vs-B comparison, which is
+what I'm measuring, because both approaches use the same model. If I regain
+Flash quota, a Flash-vs-Flash-Lite comparison would be a useful add-on and is
+noted as possible future work.
+
 ## AI mistakes caught
 - 2026-10-02: AI-drafted tie-breaks depended on information not present in a single transaction string.
 - 2026-10-02: When showing a commit diff, Claude Code printed the first rows of the sealed `generation_meta.csv`, exposing intended categories for `t001` to `t003`. Fixed by forcing them into reserve.
