@@ -22,6 +22,20 @@ def cache_key(model, prompt, config=CONFIG):
     return hashlib.sha256(blob.encode("utf-8")).hexdigest()
 
 
+def _redact(text):
+    key = os.environ.get("GEMINI_API_KEY")
+    return text.replace(key, "[REDACTED]") if key else text
+
+
+def _save_error(e, cache_dir):
+    """Keep the full error body (quota metric, retry delay) so a persistent failure is diagnosable."""
+    body = {k: getattr(e, k, None) for k in ("code", "status", "message", "details")}
+    body["type"] = type(e).__name__
+    path = Path(cache_dir) / "last_error.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(_redact(json.dumps(body, indent=2, default=str)), encoding="utf-8")
+
+
 def make_client():
     from dotenv import load_dotenv
     from google import genai
@@ -47,7 +61,10 @@ def classify(prompt, model, client=None, cache_dir=CACHE, sleep=time.sleep, stat
         except Exception as e:  # transport errors have no code; retry those too
             code = getattr(e, "code", None)
             if (code is not None and code not in RETRY_CODES) or attempt == RETRIES - 1:
-                raise LLMError(f"API call failed: {type(e).__name__} (code={code})") from None
+                _save_error(e, cache_dir)
+                status, msg = getattr(e, "status", None), getattr(e, "message", None)
+                raise LLMError(_redact(f"API call failed: {type(e).__name__} (code={code}, status={status}): {msg}. "
+                                       f"Full body in {Path(cache_dir) / 'last_error.json'}")) from None
             sleep(5 * 2 ** attempt)
     text = resp.text or ""  # empty or blocked response is a model output; parse() scores it invalid
     path.parent.mkdir(parents=True, exist_ok=True)

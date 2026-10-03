@@ -1,3 +1,4 @@
+import json
 import sys
 from pathlib import Path
 from types import SimpleNamespace
@@ -9,8 +10,8 @@ from llm import LLMError, cache_key, classify  # noqa: E402
 
 
 class FakeError(Exception):
-    def __init__(self, code):
-        self.code = code
+    def __init__(self, code, status=None, message=None, details=None):
+        self.code, self.status, self.message, self.details = code, status, message, details
 
 
 class FakeClient:
@@ -50,11 +51,23 @@ def test_retries_rate_limit_then_succeeds(tmp_path):
     assert len(client.calls) == 3 and waits == [5, 10]
 
 
-def test_persistent_failure_aborts_and_caches_nothing(tmp_path):
+def test_persistent_failure_aborts_and_caches_no_response(tmp_path):
     client = FakeClient([FakeError(429)] * 5)
     with pytest.raises(LLMError):
         classify("p", "m", client, tmp_path, no_sleep)
-    assert not list(tmp_path.iterdir())
+    assert [p.name for p in tmp_path.iterdir()] == ["last_error.json"]
+
+
+def test_error_body_saved_and_key_redacted(tmp_path, monkeypatch):
+    monkeypatch.setenv("GEMINI_API_KEY", "SECRET123")
+    details = {"error": {"status": "RESOURCE_EXHAUSTED", "details": [{"quotaMetric": "per_day", "note": "SECRET123"}]}}
+    client = FakeClient([FakeError(429, "RESOURCE_EXHAUSTED", "quota exceeded", details)] * 5)
+    with pytest.raises(LLMError) as exc:
+        classify("p", "m", client, tmp_path, no_sleep)
+    saved = json.loads((tmp_path / "last_error.json").read_text(encoding="utf-8"))
+    assert saved["status"] == "RESOURCE_EXHAUSTED" and saved["details"]["error"]["details"][0]["quotaMetric"] == "per_day"
+    assert "SECRET123" not in (tmp_path / "last_error.json").read_text(encoding="utf-8")
+    assert "RESOURCE_EXHAUSTED" in str(exc.value) and "quota exceeded" in str(exc.value)
 
 
 def test_non_retryable_error_aborts_immediately(tmp_path):
