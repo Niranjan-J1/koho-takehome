@@ -16,12 +16,10 @@ the full read and every caveat.
 2. `pip install -r requirements.txt`
 3. Create a `.env` file in the repo root:
 
-GEMINI_API_KEY=your_key_here
-GEMINI_MODEL=gemini-3.5-flash-lite
-
    A free Google AI Studio key is enough. All data is synthetic, so free-tier
    data-use terms are not a concern. Do not enable billing — it removes the
-   free allowance.
+   free allowance. Add the key and the model in the .env file with names: GEMINI_API_KEY=your_key_here
+GEMINI_MODEL=gemini-3.5-flash-lite
 
 ## Run it
 Dev set (for iterating; safe to run freely)
