@@ -219,6 +219,40 @@ noted as possible future work.
 
 **Observed on dev, before test:** B reported only 3 distinct confidence values (90, 95, 100), with 42 of 50 rows at 100. The ranking is therefore coarse: no coverage below 84% is reachable on dev, and the 80/70/60/50% levels all collapse to the same 42 rows. B made no dev errors, so dev only shows that the code runs, not whether confidence predicts errors. If test shows the same coarseness, the result will be reported as "confidence too coarse to rank", not tuned away.
 
+## 2026-10-03: Test results and error analysis (single pre-registered run)
+**Model:** gemini-3.5-flash-lite. n=100 test rows, run once as pre-registered. Numbers below come from `results/A_test.csv` and `results/B_test.csv`.
+
+**Headline:**
+- A (names only): 92.0% (92/100), 95% Wilson CI 85.0–95.9%. Invalid outputs: 0.
+- B (full definitions + tie-breaks): 99.0% (99/100), CI 94.6–99.8%. Invalid outputs: 0.
+- Paired: both right 92, only A 0, only B 7, both wrong 1.
+- B - A = +7.0%, 95% paired bootstrap CI +2.0% to +12.0% (not independent evidence; all discordant rows favour B).
+- Exact McNemar two-sided p = 0.0156 on 7 discordant rows (7-0).
+- **Conclusion, following the pre-registered rule:** B is better than A on test, and the difference is statistically significant at alpha 0.05 under exact McNemar. With 7 discordant rows the result rests on few items, so the size of the gap (+7 points) is uncertain even though its direction is supported.
+- **Against my recorded expectation:** A matched its dev number (92%), and B fell slightly from 100% to 99%. The gap did reach significance at n=100.
+
+**Error analysis (three buckets; Claude Code's read, not yet reviewed by me):**
+1. **Definitions and tie-breaks resolved convention-dependent rows (4 rows, B fixed all).**
+   - t013 CIRCLE K: A->Groceries, B->Shopping. Convenience chain; this is the row type where my convention and the Transport fuel-brand tie-break can disagree, and B landed on my label.
+   - t043 RETURN WINNERS: A->Shopping, B->Income & Transfers (refund/return tie-break).
+   - t213 ATM W/D and t228 CASH WITHDRAWAL: A->Fees & Interest / Other, B->Income & Transfers (definition names cash withdrawals).
+2. **B used Other instead of forcing a wrong fit (3 rows, B fixed all).**
+   - t088 SERVICEONTARIO LICENCE: A->Bills & Utilities, B->Other.
+   - t275 UNIV OF TORONTO FEES: A->Fees & Interest, B->Other. A appears to have keyed on the word "FEES"; B's Fees definition limits that category to bank fees and interest.
+   - t061 VIA RAIL CANADA: A->Travel, B->Transport. Neither definition names intercity rail, so this row is a judgement call in my labels; B matched my label.
+3. **Residual error, a taxonomy gap (1 row, both wrong).**
+   - t268 SERVICE ONTARIO: both -> Bills & Utilities (B confidence 95). Government services have no category, so the correct label is Other by elimination. B got the near-identical t088 SERVICEONTARIO LICENCE right, so its handling of this merchant is inconsistent across string variants.
+
+**Pattern:** As on dev, B's advantage came entirely from rows the definitions and tie-breaks were written for (cash, refunds, convenience chains) and from using Other as a last resort. Neither approach failed on clearly named merchants.
+
+**Confidence analysis (B, test, pre-registered method):**
+- 4 distinct confidence values; 0 rows missing or invalid.
+- 100% coverage: 99.0% accuracy, 1 error. 96% coverage (confidence ≥95): 99.0%, 1 error. 83% coverage (confidence 100): 100.0%, 0 errors.
+- Levels below 83% are not reachable: 83 of 100 rows report confidence 100, so the 80/70/60/50% levels collapse to the same 83 rows.
+- Reading: B's single error (t268) was reported at confidence 95, below the 100 group, so routing everything under 100 to a human would have caught it, at the cost of reviewing 17 rows. With 1 error in 100 this is one data point, not evidence that confidence is calibrated. Confidence is coarse, as seen on dev.
+
+**Limitations carried into the writeup:** synthetic data written by the same author as the taxonomy (Claude Code); a small, strong-enough model on clean-ish strings; labels by a single labeller; 11 rows removed to reserve after exposure, 10 of them ambiguous; results apply to gemini-3.5-flash-lite and may not carry over to other models.
+
 ## AI mistakes caught
 - 2026-10-02: AI-drafted tie-breaks depended on information not present in a single transaction string.
 - 2026-10-02: When showing a commit diff, Claude Code printed the first rows of the sealed `generation_meta.csv`, exposing intended categories for `t001` to `t003`. Fixed by forcing them into reserve.
