@@ -209,6 +209,16 @@ noted as possible future work.
   numbers (dev may be optimistic; B's 100% will likely not hold), and the
   A-vs-B gap may or may not reach significance at n=100.
 
+## 2026-10-03: Confidence analysis method (fixed before any test call)
+**Purpose:** This measures whether B's self-reported confidence can be used to decide which predictions to auto-accept vs route to a human. It is descriptive at n=100, not a calibration guarantee.
+**Method (`src/confidence.py`, run as `python src/confidence.py --approach B --split test`):**
+- Rank test rows by B's reported confidence, highest first.
+- Report accuracy at coverage levels 100/90/80/70/60/50% (the share of highest-confidence rows kept).
+- Rows with tied confidence are kept together; report the number of distinct confidence values. When a tie group straddles a coverage level, the whole group is kept and the actual coverage achieved is reported next to the target.
+- Invalid or missing confidence is treated as lowest. Rows whose prediction is invalid are also ranked lowest, since an invalid prediction cannot be auto-accepted.
+
+**Observed on dev, before test:** B reported only 3 distinct confidence values (90, 95, 100), with 42 of 50 rows at 100. The ranking is therefore coarse: no coverage below 84% is reachable on dev, and the 80/70/60/50% levels all collapse to the same 42 rows. B made no dev errors, so dev only shows that the code runs, not whether confidence predicts errors. If test shows the same coarseness, the result will be reported as "confidence too coarse to rank", not tuned away.
+
 ## AI mistakes caught
 - 2026-10-02: AI-drafted tie-breaks depended on information not present in a single transaction string.
 - 2026-10-02: When showing a commit diff, Claude Code printed the first rows of the sealed `generation_meta.csv`, exposing intended categories for `t001` to `t003`. Fixed by forcing them into reserve.
