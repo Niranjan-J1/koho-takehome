@@ -1,0 +1,101 @@
+id,description,label,prediction,valid,normalised,confidence,correct
+t006,FOREIGN EXCHANGE FEE,Fees & Interest,Fees & Interest,True,False,100.0,True
+t007,JEAN COUTU LAVAL,Health & Wellness,Health & Wellness,True,False,95.0,True
+t009,FRESHCO*HAMILTON,Groceries,Groceries,True,False,100.0,True
+t010,AIR CANADA 0142385671,Travel,Travel,True,False,100.0,True
+t011,T&T SUPERMARKET RICHMOND BC,Groceries,Groceries,True,False,100.0,True
+t013,CIRCLE K #2841,Shopping,Groceries,True,False,90.0,False
+t016,PAYPAL,Other,Other,True,False,100.0,True
+t019,DROPBOX*7KX2M,Subscriptions,Subscriptions,True,False,100.0,True
+t020,TELUS MOBILITY,Bills & Utilities,Bills & Utilities,True,False,100.0,True
+t022,Loblaws 1042,Groceries,Groceries,True,False,100.0,True
+t024,FOREIGN EXCH FEE,Fees & Interest,Fees & Interest,True,False,100.0,True
+t025,NETFLIX*MONTHLY,Subscriptions,Subscriptions,True,False,100.0,True
+t026,SQ *HALIFAX BOOKSHOP,Shopping,Shopping,True,False,95.0,True
+t027,INTEREST CHARGE,Fees & Interest,Fees & Interest,True,False,100.0,True
+t028,SHOPPERS DRUG MART #2231,Health & Wellness,Health & Wellness,True,False,95.0,True
+t029,PIONEER #8830,Transport,Transport,True,False,95.0,True
+t033,REXALL PHARMA PLUS BURNABY BC,Health & Wellness,Health & Wellness,True,False,100.0,True
+t038,CANADIAN TIRE #0161,Shopping,Shopping,True,False,95.0,True
+t043,RETURN WINNERS #212,Income & Transfers,Shopping,True,False,100.0,False
+t049,SHOPPERS DRUG MRT 0412,Health & Wellness,Health & Wellness,True,False,95.0,True
+t050,BOSTON PIZZA #207,Dining,Dining,True,False,100.0,True
+t051,NO FRILLS #0481,Groceries,Groceries,True,False,100.0,True
+t055,IKEA #0213,Shopping,Shopping,True,False,100.0,True
+t060,POS REXALL #7241,Health & Wellness,Health & Wellness,True,False,100.0,True
+t061,VIA RAIL CANADA,Transport,Travel,True,False,100.0,False
+t063,A&W RESTAURANTS CALGARY AB,Dining,Dining,True,False,100.0,True
+t070,SDM #1190 TORONTO,Health & Wellness,Health & Wellness,True,False,95.0,True
+t077,AMAZON.CA,Shopping,Shopping,True,False,100.0,True
+t085,SPOTIFY AB STOCKHOLM,Subscriptions,Subscriptions,True,False,100.0,True
+t086,CINEPLEX ODEON YORKGATE,Entertainment,Entertainment,True,False,100.0,True
+t088,SERVICEONTARIO LICENCE,Other,Bills & Utilities,True,False,100.0,False
+t089,PAYPAL INST XFER,Income & Transfers,Income & Transfers,True,False,95.0,True
+t092,PAYROLL DEP,Income & Transfers,Income & Transfers,True,False,100.0,True
+t093,CINEPLEX #0214,Entertainment,Entertainment,True,False,100.0,True
+t095,HARVEYS #0342,Dining,Dining,True,False,100.0,True
+t099,GREEN P PARKING TORONTO,Transport,Transport,True,False,100.0,True
+t100,MICROSOFT*365 PERSONAL,Subscriptions,Subscriptions,True,False,100.0,True
+t101,CO-OP GAS BAR #12 SASKATOON SK,Transport,Transport,True,False,95.0,True
+t105,TTC*FARE,Transport,Transport,True,False,100.0,True
+t107,WHOLE F,Groceries,Groceries,True,False,95.0,True
+t118,GAS,Transport,Transport,True,False,95.0,True
+t120,INTERAC E-TRNSFR RCVD,Income & Transfers,Income & Transfers,True,False,95.0,True
+t123,DOLLARAMA #1224,Shopping,Shopping,True,False,100.0,True
+t127,NOFRILLS BRAMPTON,Groceries,Groceries,True,False,100.0,True
+t129,PRESTO AUTOLOAD,Transport,Transport,True,False,100.0,True
+t134,ESSO #4410,Transport,Transport,True,False,100.0,True
+t137,NSF FEE,Fees & Interest,Fees & Interest,True,False,100.0,True
+t139,BELL MOBILITY,Bills & Utilities,Bills & Utilities,True,False,100.0,True
+t140,PIZZAPIZZA,Dining,Dining,True,False,100.0,True
+t145,A&W #0732,Dining,Dining,True,False,100.0,True
+t147,CASH ADV INTEREST,Fees & Interest,Fees & Interest,True,False,100.0,True
+t152,UBER *TRIP HELP.UBER.COM,Transport,Transport,True,False,100.0,True
+t153,WESTJET*VACATIONS,Travel,Travel,True,False,100.0,True
+t154,ULTRAMAR #2210 QC,Transport,Transport,True,False,100.0,True
+t156,SHAW CABLESYSTEMS CALGARY,Bills & Utilities,Bills & Utilities,True,False,100.0,True
+t165,UBER *PENDING,Transport,Transport,True,False,95.0,True
+t166,SQ *DOWNTOWN DENTAL,Health & Wellness,Health & Wellness,True,False,100.0,True
+t167,APPLE.COM/BILL ITUNES.COM,Subscriptions,Subscriptions,True,False,100.0,True
+t168,CDN TIRE 0161 BRAMPTON,Shopping,Shopping,True,False,95.0,True
+t170,ADOBE *ACROPRO SUBS,Subscriptions,Subscriptions,True,False,100.0,True
+t171,STARBUCKS COFFEE VANCOUVER BC,Dining,Dining,True,False,100.0,True
+t175,STAPLES #214,Shopping,Shopping,True,False,95.0,True
+t178,CINEPLEX ENTERTAINMENT TORONTO,Entertainment,Entertainment,True,False,100.0,True
+t182,Canadian Tire #0222,Shopping,Shopping,True,False,95.0,True
+t187,INTERAC E-TRNSFR,Income & Transfers,Income & Transfers,True,False,95.0,True
+t188,TIM HORTONS 0987 BRAMPTON ON,Dining,Dining,True,False,100.0,True
+t189,SQ *THE PINE CAFE,Dining,Dining,True,False,95.0,True
+t193,EI PAYMENT SERVICE CANADA,Income & Transfers,Income & Transfers,True,False,100.0,True
+t207,Sobeys Urban Fresh,Groceries,Groceries,True,False,100.0,True
+t211,TELUS COMMUNICATIONS EDMONTON,Bills & Utilities,Bills & Utilities,True,False,100.0,True
+t213,ATM W/D #3321 TORONTO ON,Income & Transfers,Fees & Interest,True,False,90.0,False
+t217,FLAIR AIRLINES,Travel,Travel,True,False,100.0,True
+t218,INDIGO TORONTO ON,Shopping,Shopping,True,False,95.0,True
+t219,EXPEDIA CANADA,Travel,Travel,True,False,100.0,True
+t220,SKIPTHEDISHES,Dining,Dining,True,False,100.0,True
+t226,FRESHCO #1210,Groceries,Groceries,True,False,100.0,True
+t228,CASH WITHDRAWAL,Income & Transfers,Other,True,False,100.0,False
+t232,SWISS CHALET TORONTO ON,Dining,Dining,True,False,100.0,True
+t237,TM *LIVE EVENT,Entertainment,Entertainment,True,False,100.0,True
+t238,AUDIBLE CA*1R5T2,Subscriptions,Subscriptions,True,False,100.0,True
+t245,SQ *LAUGH LOFT COMEDY,Entertainment,Entertainment,True,False,100.0,True
+t249,MARY BROWNS CHICKEN #44,Dining,Dining,True,False,100.0,True
+t250,ROGERS,Bills & Utilities,Bills & Utilities,True,False,95.0,True
+t254,E-TRANSFER AUTODEPOSIT,Income & Transfers,Income & Transfers,True,False,100.0,True
+t256,VIDEOTRON MONTREAL QC,Bills & Utilities,Bills & Utilities,True,False,100.0,True
+t257,DISNEYPLUS,Subscriptions,Subscriptions,True,False,100.0,True
+t264,HYDRO ONE NETWORKS,Bills & Utilities,Bills & Utilities,True,False,100.0,True
+t268,SERVICE ONTARIO,Other,Bills & Utilities,True,False,100.0,False
+t270,BELL ALIANT HALIFAX NS,Bills & Utilities,Bills & Utilities,True,False,100.0,True
+t275,UNIV OF TORONTO FEES,Other,Fees & Interest,True,False,100.0,False
+t278,DOLLAR,Shopping,Shopping,True,False,85.0,True
+t285,INTEREST ADJ,Fees & Interest,Fees & Interest,True,False,100.0,True
+t289,SAVE-ON-FOODS #6602 VANCOUVER BC,Groceries,Groceries,True,False,100.0,True
+t291,CANADAS WONDERLAND VAUGHAN,Entertainment,Entertainment,True,False,100.0,True
+t293,BRANCH DEPOSIT,Income & Transfers,Income & Transfers,True,False,100.0,True
+t294,SWISS CHALET #1124,Dining,Dining,True,False,100.0,True
+t295,TST* SUSHI KAZE,Dining,Dining,True,False,100.0,True
+t297,HOME DEPOT 7011 BARRIE ON,Shopping,Shopping,True,False,100.0,True
+t299,SOBEYS #0867,Groceries,Groceries,True,False,100.0,True
+t300,SECOND CUP #512,Dining,Dining,True,False,100.0,True
