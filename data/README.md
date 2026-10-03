@@ -7,8 +7,8 @@
 | `dev_transactions.csv` | Seeded split script output, unlabelled | `id`, `description` |
 | `test_transactions.csv` | Seeded split script output, unlabelled | `id`, `description` |
 | `reserve_transactions.csv` | Seeded split script output, unlabelled. Not labelled or evaluated. Includes 11 forced ids whose intended category was exposed | `id`, `description` |
-| `dev_labels.csv` | Template from the split, labels hand-written by the author (see `LABELLING.md`) | `id`, `description`, `label`, `note` |
-| `test_labels.csv` | Template from the split, labels hand-written by the author (see `LABELLING.md`) | `id`, `description`, `label`, `note` |
+| `dev_labels.csv` | Template from the split, labels hand-written by the author (see `LABELLING.md`) | `id`, `description`, `label` |
+| `test_labels.csv` | Template from the split, labels hand-written by the author (see `LABELLING.md`) | `id`, `description`, `label` |
 
 - Only the two `*_labels.csv` files are hand-written. They are ground truth and must never be edited by the AI.
 - The generated data carries no labels, so labelling is blind.

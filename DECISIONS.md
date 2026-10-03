@@ -122,6 +122,14 @@
 - Approach B's prompt does not contain this convention. Rows where the convention decides the label (bare PayPal, truncated strings, convenience chains vs fuel) may be systematically wrong for both approaches. That error is part of what is measured.
 - The frozen taxonomy's Transport tie-break says fuel brands are Transport even if they also run convenience stores, while this convention sends convenience chains to Shopping unless the string says fuel. A chain that is both can land differently under each. My label decides, with the reason in the note.
 
+## 2026-10-02: Labelling done; note column dropped
+**Status:** I finished labelling dev (50) and test (100), in that order, before any model run.
+**Decision:** The `note` column is dropped from both label files, which are now `id`, `description`, `label`. Torn-case reasoning lives in `data/LABELLING.md` under "Labelling notes", next to the convention. Only where the reasoning is written changes; the convention itself is unchanged.
+**Reasoning:** No note was written for any row, so the column carried no information, and one shared place for reasoning is easier to audit than a per-row column.
+**Convention amendment (PayPal):** The frozen rule "bare PAYPAL → Income & Transfers" is replaced by "bare PAYPAL → Other (unknowable); PAYPAL with a transfer/xfer keyword → Income & Transfers". Bare PayPal could be a purchase, a transfer or a refund, so the string alone cannot decide it. I labelled `t016` (`PAYPAL`) as Other, and `t089` (`PAYPAL INST XFER`) stays Income & Transfers. The original entry above is left unedited for the audit trail.
+**Caveat:** This change was made during test labelling, prompted by a test string, before any model run. No model output was involved. Only these two test rows are affected; dev has no PayPal rows.
+**AI edit to label files, at my request:** Claude Code removed the empty `note` column from both files. It checked that every id, description and label is identical before and after, and that every label is one of the 12 taxonomy names. No label was read out or changed.
+
 ## AI mistakes caught
 - 2026-10-02: AI-drafted tie-breaks depended on information not present in a single transaction string.
 - 2026-10-02: When showing a commit diff, Claude Code printed the first rows of the sealed `generation_meta.csv`, exposing intended categories for `t001` to `t003`. Fixed by forcing them into reserve.
