@@ -191,6 +191,24 @@ noted as possible future work.
 
 **Label audit and its bias:** To avoid fixing only model-favourable rows, the other four dev errors (t012, t072, t074, t273) were re-checked. Claude Code re-checked the other four labels against the taxonomy and reported all four consistent; I reviewed its reasoning and agree. None changed; these are genuine model errors, not label errors. This audit only looked at rows where a model disagreed with me. Rows where a model agreed with a wrong label were not re-checked, so correcting disagreements can only raise measured accuracy. I checked test for any Farm Boy row before the test run: there is none.
 
+## 2026-10-03: Test-run pre-registration (written before any test call)
+- Headline comparison: test-set accuracy, Approach A vs Approach B, on the
+  same 100 test rows.
+- Significance test: exact McNemar, two-sided, alpha = 0.05, on the
+  discordant rows. Paired bootstrap 95% CI on (B - A) reported alongside,
+  with the caveat already logged that at this sample size the bootstrap is
+  not independent evidence.
+- Primary conclusion follows the more conservative of the two (McNemar).
+- Confidence analysis: runs on Approach B only, chosen on dev (B 100% vs A
+  92% after the t262 correction). Accuracy-vs-coverage via confidence.py.
+- Test is run exactly once: A and B each via --split test --confirm-test,
+  then compare.py --split test. No prompt or taxonomy changes after this
+  entry; both are frozen. If a result looks surprising I will report it, not
+  re-run to get a different number.
+- Expectation recorded in advance: I expect test accuracy below the dev
+  numbers (dev may be optimistic; B's 100% will likely not hold), and the
+  A-vs-B gap may or may not reach significance at n=100.
+
 ## AI mistakes caught
 - 2026-10-02: AI-drafted tie-breaks depended on information not present in a single transaction string.
 - 2026-10-02: When showing a commit diff, Claude Code printed the first rows of the sealed `generation_meta.csv`, exposing intended categories for `t001` to `t003`. Fixed by forcing them into reserve.
