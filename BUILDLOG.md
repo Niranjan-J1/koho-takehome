@@ -3,7 +3,7 @@
 ## 1. How I framed the problem, and the taxonomy
 KOHO's real question is "how do you know it's any good?", so I treated the
 **evaluation harness as the deliverable** and the classifier as the easy part.
-The classifier is ~30 lines; the harness, the labelling discipline, and the
+The classifier is ~150 lines (call, prompts and parsing); the harness, the labelling discipline, and the
 statistics are the actual work.
 
 I built a 12-category taxonomy for Canadian bank descriptors: Groceries,
@@ -38,17 +38,20 @@ flowchart TD
   synthetic data, and wrote the 57-test suite. I worked in plan mode, approved
   each plan, reviewed every diff, and committed in small pieces so the git
   history shows the supervision.
+- **Refusing to guess about the SDK.** I asked Claude Code to fetch Google's
+  current quickstart and cite it rather than code from memory. The page showed
+  a newer Interactions API, which conflicted with my instruction to use
+  `generate_content`. Claude Code flagged the conflict instead of silently
+  picking one, and said it had not confirmed whether Interactions supports
+  temperature 0 and JSON output. I chose `generate_content` deliberately; I
+  never confirmed that Interactions lacks those controls. This was AI
+  correctly refusing to guess, not an AI error.
 - I deliberately kept the **authoring model (Claude) separate from the
   classifier (Gemini)**, so the classifier wasn't grading its own family's
   output.
 
 ## 3. Where AI got it wrong (the part that matters most)
-Four real cases, each caught by review rather than luck:
-- **Stale SDK path.** The Gemini quickstart (and the model's own memory)
-  pointed at a new Interactions API. I needed `generate_content` for
-  temperature 0 and JSON output. Claude Code flagged the mismatch instead of
-  following the page — caught because I made it fetch current docs and cite
-  them rather than code from memory.
+Three real cases, each caught by review rather than luck:
 - **Discarded error body.** My `llm.py` threw away the API's error response,
   so when I hit a 429 I couldn't tell whether it was a per-minute or per-day
   limit. Caught when I asked for the error detail and there was nothing saved.
@@ -75,7 +78,7 @@ Four real cases, each caught by review rather than luck:
 - **Tuning the model's thinking budget** — a second variable alongside the
   prompt would confound the comparison.
 - **Switching models mid-run** when I hit rate limits — would mix two models
-  in one result set. I switched cleanly (flash → flash-lite, forced by quota),
+  in one result set. I switched cleanly (gemini-3.8-flash → gemini-3.5-flash-lite, forced by quota),
   re-ran everything, and the cache key includes the model so nothing mixes.
 
 ## 5. What would worry me in production tomorrow

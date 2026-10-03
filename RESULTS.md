@@ -36,9 +36,9 @@ caveats:
    it. That alignment makes the task easier than real bank data. I'd expect
    materially lower accuracy on real KOHO transaction strings.
 
-3. **The model made zero careless errors.** Every single error (A's 8 and
-   B's 1) was a genuinely ambiguous or convention-dependent string, not a
-   fumbled obvious merchant. That's a finding in itself.
+3. **The model made no errors on clearly-named merchants.** Every single
+   error (A's 8 and B's 1) was a convention- or definition-dependent string,
+   not a fumbled obvious merchant. That's a finding in itself.
 
 ## Where B's advantage came from
 B fixed nothing on obvious merchants — it won entirely on the catch-all and
@@ -48,7 +48,7 @@ non-merchant categories, where a bare category name carries little meaning:
 |---|---|---|---|---|
 | t013 | CIRCLE K #2841 | Groceries | Shopping | convenience-chain tie-break |
 | t043 | RETURN WINNERS #212 | Shopping | Income & Transfers | refund/return rule |
-| t061 | VIA RAIL CANADA | Travel | Transport | transit vs travel tie-break |
+| t061 | VIA RAIL CANADA | Travel | Transport | judgement call in my labels (the taxonomy doesn't name rail); B matched my label |
 | t088 | SERVICEONTARIO LICENCE | Bills & Utilities | Other | definition of Other |
 | t213 | ATM W/D #3321 | Fees & Interest | Income & Transfers | cash-withdrawal definition |
 | t228 | CASH WITHDRAWAL | Other | Income & Transfers | cash-withdrawal definition |
@@ -62,8 +62,9 @@ Transfers (7/10). B took both to near-perfect.
 |---|---|---|---|
 | t268 | SERVICE ONTARIO | Other | Bills & Utilities |
 
-Compare with t088 `SERVICEONTARIO LICENCE`, which B got right. The only
-difference is the word "LICENCE." With it, the model could tell it wasn't a
+Compare with t088 `SERVICEONTARIO LICENCE`, which B got right. The two
+strings differ in two ways: the space (`SERVICEONTARIO` vs `SERVICE ONTARIO`)
+and the word "LICENCE". With "LICENCE", the model could tell it wasn't a
 utility; without it, bare "SERVICE ONTARIO" reads like a utility bill. This
 is the limit of the tie-break approach: definitions help only when the string
 carries a signal to act on.
@@ -80,9 +81,10 @@ to auto-accept vs route to a human.
 
 **Conclusion: the confidence signal is too coarse to be useful.** B used only
 4 distinct confidence values, and 83 of 100 rows claimed exactly 100. You
-can't get coverage below 83% because of the tie. It weakly isolated the one
-error (confidence 85), but with this little granularity I would not trust it
-for triage in production. A real system would need token log-probabilities or
+can't get coverage below 83% because of the tie. The one error (t268) was
+reported at confidence 95, so it stays in the kept set down to 96% coverage;
+catching it means routing the 17 rows below confidence 100 to a human. With
+this little granularity I would not trust it for triage in production. A real system would need token log-probabilities or
 a self-consistency signal instead.
 
 ## What these numbers do NOT tell me
