@@ -1,4 +1,7 @@
-"""List the models the GEMINI_API_KEY can access, with supported methods. Read-only."""
+"""List the models the GEMINI_API_KEY can access, with supported methods. Read-only.
+
+Setup helper for choosing GEMINI_MODEL, so no model string is ever guessed or hardcoded.
+"""
 import os
 import sys
 

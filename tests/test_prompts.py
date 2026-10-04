@@ -1,3 +1,4 @@
+"""Approach A and B prompts are identical except the category block, and A's block is a strict prefix of B's."""
 import sys
 from pathlib import Path
 

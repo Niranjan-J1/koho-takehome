@@ -1,3 +1,4 @@
+"""Strict parsing: only the 12 names (after case/whitespace folding) count as valid; everything else is invalid."""
 import sys
 from pathlib import Path
 

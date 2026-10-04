@@ -1,4 +1,8 @@
-"""Parse a raw model response. A category that is not one of the 12 names (after case/whitespace folding) is invalid."""
+"""Parse a raw model response. A category that is not one of the 12 names (after case/whitespace folding) is invalid.
+
+Invalid outputs are scored as errors, never dropped: dropping them would shrink n differently for each
+approach and inflate accuracy by hiding a real failure mode.
+"""
 import json
 
 from taxonomy import category_names

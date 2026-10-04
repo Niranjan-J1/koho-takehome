@@ -1,3 +1,4 @@
+"""Taxonomy loading: the real file's shape, and rejection of missing definitions or duplicate names."""
 import sys
 from pathlib import Path
 

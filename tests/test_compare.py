@@ -1,3 +1,4 @@
+"""Paired comparison: exact McNemar against hand-computed p-values, the seeded bootstrap, and row alignment."""
 import sys
 from pathlib import Path
 

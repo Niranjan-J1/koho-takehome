@@ -1,4 +1,9 @@
-"""Cached Gemini call. Reruns are reproducible because responses are cached, not because of temperature 0 or the seed."""
+"""Cached Gemini call: the only module that talks to the API. eval.py sends every prompt through classify().
+
+Reruns are reproducible because responses are cached, not because of temperature 0 or the seed:
+those reduce variation between fresh calls but do not guarantee identical outputs, so a cleared
+cache can give different results.
+"""
 import hashlib
 import json
 import os
@@ -9,15 +14,23 @@ CACHE = Path(__file__).resolve().parent.parent / "cache"
 SEED = 2026
 RETRIES = 5
 RETRY_CODES = {429, 500, 502, 503, 504}
+# JSON mode, but deliberately no enum/schema on the category: a constrained enum would hide
+# invented categories, which we want to see and score as errors. AFC is off because no tools are used.
 CONFIG = {"temperature": 0, "seed": SEED, "response_mime_type": "application/json",
           "automatic_function_calling": {"disable": True}}
 
 
 class LLMError(RuntimeError):
-    """Persistent API failure. The run aborts; it is never scored as a model error."""
+    """Persistent API failure. The run aborts; it is never scored as a model error.
+
+    An outage or quota error says nothing about classification quality. Scoring it as wrong would
+    penalise whichever approach happened to be running, so we stop and resume from the cache instead.
+    """
 
 
 def cache_key(model, prompt, config=CONFIG):
+    """The model is part of the key so responses from different models never collide. After the
+    switch from gemini-3.8-flash, its cached calls stay separate and cannot leak into results."""
     blob = json.dumps({"model": model, "prompt": prompt, "config": config}, sort_keys=True)
     return hashlib.sha256(blob.encode("utf-8")).hexdigest()
 

@@ -1,3 +1,4 @@
+"""Accuracy-vs-coverage table: tie groups kept whole, missing or invalid confidence ranked lowest."""
 import sys
 from pathlib import Path
 

@@ -14,6 +14,7 @@ def load(path):
 
 
 def compare(a_rows, b_rows):
+    # A paired test is only valid if both files score the same rows against the same labels.
     if [(i, l) for i, l, _ in a_rows] != [(i, l) for i, l, _ in b_rows]:
         raise ValueError("A and B results must cover the same ids and labels in the same order")
     a, b = [x for _, _, x in a_rows], [x for _, _, x in b_rows]

@@ -1,3 +1,4 @@
+"""Seeded stratified split on a synthetic fixture (not the real data): disjoint, complete, deterministic, guarded."""
 import csv
 import sys
 from pathlib import Path

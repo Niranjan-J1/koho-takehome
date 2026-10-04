@@ -1,3 +1,4 @@
+"""Cached API call with a scripted fake client: cache hits, retry and abort behaviour, error-body capture. No network."""
 import json
 import sys
 from pathlib import Path

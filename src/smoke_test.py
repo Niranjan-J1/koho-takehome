@@ -1,4 +1,7 @@
-"""Smoke test: one generate_content call to the model named in GEMINI_MODEL."""
+"""Smoke test: one generate_content call to the model named in GEMINI_MODEL.
+
+Setup check only. It bypasses llm.py, so it is uncached and not part of the evaluation path.
+"""
 import os
 import sys
 

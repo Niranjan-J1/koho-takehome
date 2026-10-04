@@ -3,6 +3,9 @@ from taxonomy import load_categories
 
 DETAILS = ("names", "full")
 
+# One template for both approaches, so the category block is the only variable. Confidence is requested
+# in both even though only B's is analysed, to keep the prompts identical. The <<< >>> markers keep the
+# merchant string separate from the instructions.
 TEMPLATE = """You classify Canadian bank transaction descriptions into exactly one category.
 
 Categories:

@@ -1,4 +1,8 @@
-"""Seeded, stratified dev/test/reserve split of data/transactions.csv. Run once, before labelling."""
+"""Seeded, stratified dev/test/reserve split of data/transactions.csv. Run once, before labelling.
+
+Stratified because 12 classes over 50 dev rows could otherwise leave a rare class empty. The strata
+come from the sealed generator file and decide membership only; they are never used as labels.
+"""
 import argparse
 import csv
 import random
@@ -6,7 +10,7 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-SEED = 2026
+SEED = 2026  # fixed before any split was seen and never re-rolled; re-rolling for a "nicer" split is tuning
 DEV_N, TEST_N = 50, 100
 # Intended categories for these ids were exposed in chat; keep them out of dev and test (see DECISIONS.md).
 # t001-t003: sealed-file rows printed. Others: Costco and Walmart intent stated in chat.
@@ -49,6 +53,7 @@ def split(rows, categories, seed=SEED, dev_n=DEV_N, test_n=TEST_N, forced=FORCED
 
 def run(data_dir=DATA, force=False):
     paths = {k: data_dir / f"{k}_transactions.csv" for k in SPLITS}
+    # Once labelling starts, an accidental re-split would silently invalidate the hand labels.
     if not force and any(p.exists() for p in paths.values()):
         sys.exit("Split files already exist; refusing to overwrite (pass --force).")
     with open(data_dir / "transactions.csv", encoding="utf-8") as f:
@@ -70,6 +75,6 @@ def run(data_dir=DATA, force=False):
 
 
 if __name__ == "__main__":
-    ap = argparse.ArgumentParser(description=__doc__)
+    ap = argparse.ArgumentParser(description="Seeded, stratified dev/test/reserve split. Run once, before labelling.")
     ap.add_argument("--force", action="store_true", help="overwrite existing split files")
     run(force=ap.parse_args().force)

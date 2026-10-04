@@ -1,4 +1,8 @@
-"""Run one approach on a split: python src/eval.py --approach A|B [--split dev] [--split test --confirm-test]."""
+"""Run one approach on a split: python src/eval.py --approach A|B [--split dev] [--split test --confirm-test].
+
+The harness entry point: builds prompts, calls the model through the cache, scores against the hand labels,
+and writes results/<approach>_<split>.csv for compare.py and confidence.py.
+"""
 import argparse
 import csv
 import os
@@ -21,6 +25,7 @@ def run(approach, split, model, data_dir=ROOT / "data", out_dir=ROOT / "results"
     names = category_names()
     with open(Path(data_dir) / f"{split}_labels.csv", encoding="utf-8") as f:
         labels = list(csv.DictReader(f))
+    # Fail fast on a typo in the hand labels; otherwise it would silently count as a model error.
     bad = {r["label"] for r in labels} - set(names)
     if bad:
         raise ValueError(f"labels not in taxonomy: {sorted(bad)}")
@@ -57,11 +62,13 @@ def report(rows, stats, names):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(description=__doc__)
+    ap = argparse.ArgumentParser(description="Run one approach (A or B) on a split and score it against the hand labels.")
     ap.add_argument("--approach", required=True, choices=sorted(APPROACHES))
     ap.add_argument("--split", default="dev", choices=["dev", "test"])
     ap.add_argument("--confirm-test", action="store_true", help="required to run the test set (run once, at the end)")
     a = ap.parse_args(argv)
+    # The test set is pre-registered to run exactly once. Checked before loading the env or calling
+    # the model, so an accidental test run costs nothing and reveals nothing.
     if a.split == "test" and not a.confirm_test:
         sys.exit("Refusing to run the test set without --confirm-test.")
     from dotenv import load_dotenv

@@ -1,3 +1,4 @@
+"""Eval runner on a tiny fixture with a fake model call: invalid outputs scored wrong, the test-split guard, Wilson values."""
 import csv
 import sys
 from pathlib import Path
