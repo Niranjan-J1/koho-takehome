@@ -19,7 +19,7 @@ def test_all_names_in_both_approaches():
 
 def test_names_block_is_strict_prefix_of_full_block():
     a, b = category_block("names").splitlines(), category_block("full").splitlines()
-    assert len(a) == len(b) == 12
+    assert len(a) == len(b) == len(load_categories())
     assert all(lb.startswith(la) and len(lb) > len(la) for la, lb in zip(a, b))
 
 

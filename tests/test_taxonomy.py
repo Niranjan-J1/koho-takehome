@@ -3,15 +3,19 @@ import sys
 from pathlib import Path
 
 import pytest
+import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
-from taxonomy import category_names, load_categories  # noqa: E402
+from taxonomy import TAXONOMY, category_names, load_categories  # noqa: E402
+
+# Count read straight from the YAML, independent of the loader, so adding a category doesn't break the suite.
+EXPECTED = len(yaml.safe_load(TAXONOMY.read_text(encoding="utf-8"))["categories"])
 
 
 def test_real_taxonomy_shape():
     cats = load_categories()
-    assert len(cats) == 12
-    assert len({c["name"] for c in cats}) == 12
+    assert len(cats) == EXPECTED
+    assert len({c["name"] for c in cats}) == EXPECTED
     assert cats[-1]["name"] == "Other"
     assert all(c["definition"] for c in cats)
 
