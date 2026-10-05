@@ -12,7 +12,7 @@ an optimistic synthetic ceiling, not a production estimate. See RESULTS.md for
 the full read and every caveat.
 
 ## Setup
-1. Python 3.11+ (developed on 3.14).
+1. Python (tested on Python 3.14).
 2. `pip install -r requirements.txt`
 3. Create a `.env` file in the repo root with your key and the model:
 
