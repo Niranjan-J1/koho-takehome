@@ -146,4 +146,4 @@ python src/confidence.py --approach B --split test  # coverage table
 pytest                                              # 57 tests, no API calls
 ```
 
-These read the committed `results/*.csv` and need no API key. Re-running `src/eval.py` makes model calls and needs a Gemini key, because the response cache is not committed. Full decision history and every logged AI mistake: `DECISIONS.md`.
+`compare.py` and `confidence.py` only re-analyse the committed `results/*.csv`: they recompute the statistics but do not re-run the model. Re-running the evaluation itself (`src/eval.py`) needs a `GEMINI_API_KEY`, because the response cache is not committed; within a working copy, re-runs are then served from the cache. Full decision history and every logged AI mistake: `DECISIONS.md`.
